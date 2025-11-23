@@ -1,0 +1,105 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Home - {{ title }}</title>
+</head>
+<body>
+    <div class="">
+        <nav class="bg-gray-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex h-16 justify-between items-center">
+                    <div class="flex items-center gap-8">
+                        <a href="#" class="text-white text-xl font-bold">Home</a>
+                        <a href="#" class="text-white text-xl ">Информация</a>
+                        <a href="#" class="text-white text-xl ">Корзина</a>
+                        <a href="#" class="text-white text-xl ">Войти</a>
+                        <div class="flex items-center space-x-4">
+                            <div class="relative group">
+                                <button class="text-white hover:bg-gray-700 px-3 py-2 rounded-md flex items-center">
+                                    Мой профил
+                                    <svg class="ml-1 w-4 h-4" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+
+                                <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
+                                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
+                                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="flex flex-col gap-2 sm:flex-row gap-2 sm:gap-0" role="search">
+                        <div class="flex gap-2">
+                            <input
+                                    class="flex w-[300px] h-[50px] px-3 bg-transparent py-2 border border-gray-300 rounded-lg sm:rounded-r-none sm:rounded-l-lg focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
+                                    type="search"
+                                    placeholder="Search"
+                                    aria-label="Search"/>
+                            <button
+                                    class="px-4 py-2 w-[100px] h-[50px] bg-transparent border border-white text-white font-bold hover:bg-gray-700 hover:text-white transition-colors rounded-lg sm:rounded-l-none sm:rounded-r-lg"
+                                    type="submit">
+                                Поиск
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="">
+        <div class="relative">
+            <img class="w-max h-max" src="/static/deps/images/bg-image.jpg" alt="">
+        </div>
+        <div class="container mx-auto px-4">
+            <!-- Каталог -->
+            <div class="absolute inset-0 inset-x-[174px] inset-y-[100px] group mb-2">
+                <!-- Кнопка dropdown -->
+                <button class="flex items-center bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors border border-gray-600">
+                Каталог
+{#                <img class="mx-1" src="../deps/icons/grid-fill.svg" alt="Catalog Icon" width="16" height="16">#}
+                <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+
+                <!-- Dropdown menu -->
+                <div class="absolute left-0 mt-1 w-48 bg-gray-800 border border-gray-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                    <ul class="py-2">
+                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Все товары</a></li>
+                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Кухня</a></li>
+                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Спальня</a></li>
+                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Гостинная</a></li>
+                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Офис</a></li>
+                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Фурнитура</a></li>
+                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Декор</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Корзинка -->
+            <div class="absolute inset-0 inset-x-[174px] inset-y-[170px]">
+                <button type="button" class="flex items-center bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors border border-gray-600">
+                    <img class="mx-1" src="/static/deps/icons/basket2-fill.svg" alt="Cart Icon" width="24" height="24">
+                    <span class="ml-2">0</span>
+                </button>
+            </div>
+            <!-- Контент -->
+            <div class="absolute inset-0 inset-x-[480px] inset-y-40">
+                {% block content %} {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    {% block about %} {% endblock %}
+
+    {% block footer %} {% endblock %}
+
+</body>
+</html>
