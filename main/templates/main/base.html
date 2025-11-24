@@ -15,16 +15,27 @@
             <div class="max-w-7xl mx-auto px-4">
                 <div class="flex h-16 justify-between items-center">
                     <div class="flex items-center gap-8">
-                        <a href="#" class="text-white text-xl font-bold">Home</a>
-                        <a href="#" class="text-white text-xl ">Информация</a>
+                        <a href="{% url 'main:main' %}" class="text-white text-xl font-bold">Home</a>
+                        <!-- Информация -->
+                        <div class="relative group">
+                            <button class="text-white hover:bg-gray-700 px-3 py-2 rounded-md flex items-center">
+                                Информация
+                            </button>
+                            <div class="absolute right-0 mt-2 w-60 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Доставка и оплата</a>
+                                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Контактная информация</a>
+                                <a href="{% url 'main:about_us' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Про нас</a>
+                            </div>
+                        </div>
                         <a href="#" class="text-white text-xl ">Корзина</a>
                         <a href="#" class="text-white text-xl ">Войти</a>
+                        <!-- Профиль -->
                         <div class="flex items-center space-x-4">
                             <div class="relative group">
                                 <button class="text-white hover:bg-gray-700 px-3 py-2 rounded-md flex items-center">
                                     Мой профил
-                                    <svg class="ml-1 w-4 h-4" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </button>
 
@@ -56,7 +67,7 @@
     </div>
     <div class="">
         <div class="relative">
-            <img class="w-max h-max" src="/static/deps/images/bg-image.jpg" alt="">
+            <img class="w-max h-[1800px]" src="/static/deps/images/bg-image.jpg" alt="">
         </div>
         <div class="container mx-auto px-4">
             <!-- Каталог -->
@@ -91,7 +102,7 @@
                 </button>
             </div>
             <!-- Контент -->
-            <div class="absolute inset-0 inset-x-[480px] inset-y-40">
+            <div class="absolute w-[1300px] inset-0 inset-x-[480px] inset-y-40">
                 {% block content %} {% endblock %}
             </div>
         </div>

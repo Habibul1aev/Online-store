@@ -1,165 +1,119 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-{% block content %}
-{#	<h1 class="mt-2 pt-2 text-[50px]"><strong>Магазин мебели HOME</strong></h1>#}
-    <!-- About Content -->
-    <section class="py-16">
-        <div class="container mx-auto ">
-            <div class="w-[1200px] bg-white shadow-xl shadow-black rounded-lg">
-                <!-- Text Content -->
-                <div class=" pt-[80px] pb-[80px] pl-[120px] pr-[120px]">
-                    <h2 class="text-4xl font-bold text-gray-800 mb-6">O нас</h2>
-                    <p class="text-lg text-gray-600 mb-6">
-                        Магазин мебели HOME был основан в 2010 году с простой целью - сделать качественную
-                        и стильную мебель доступной для каждой семьи. Начиная с небольшой мастерской,
-                        мы выросли в крупный розничный сеть с собственным производством.
-                    </p>
-                    <p class="text-lg text-gray-600 mb-8">
-                        Сегодня мы объединяем лучшие традиции мебельного производства с современными
-                        технологиями и дизайнерскими решениями. Каждый наш продукт - это результат
-                        кропотливой работы команды профессионалов.
-                    </p>
+{% block title %}
 
-                    <div class="grid grid-cols-2 gap-6 mb-8">
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-gray-700 mb-2">10+</div>
-                            <div class="text-gray-600">Лет на рынке</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-gray-700 mb-2">5000+</div>
-                            <div class="text-gray-600">Довольных клиентов</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-gray-700 mb-2">100+</div>
-                            <div class="text-gray-600">Моделей мебели</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-gray-700 mb-2">5</div>
-                            <div class="text-gray-600">Городов присутствия</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 {% endblock %}
 
-{% block about %}
-	<!-- Values Section -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Наши ценности</h2>
+{% block content %}
+    <div class="flex gap-[40px]">
+        <!-- Компактная карточка товара -->
+        <div class="bg-white w-[400px] rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden group">
+            <!-- Бейдж акции -->
+            <div class="absolute top-3 left-3 z-10">
+                <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                    -20%
+                </span>
+            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Value 1 -->
-                <div class="text-center p-6">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-blue-600" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            <!-- Изображение товара -->
+            <div class="relative overflow-hidden">
+                <img
+                    src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80"
+                    alt="Угловой диван 'Комфорт'"
+                    class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                >
+            </div>
+
+            <!-- Контент карточки -->
+            <div class="p-4">
+                <!-- Категория и рейтинг -->
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs text-gray-500">Диваны</span>
+                    <div class="flex items-center text-amber-400">
+                        <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                         </svg>
+                        <span class="text-xs ml-1 text-gray-600">4.8</span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4">Качество</h3>
-                    <p class="text-gray-600">
-                        Используем только проверенные материалы и фурнитуру.
-                        Гарантия на всю продукцию - 3 года.
-                    </p>
                 </div>
 
-                <!-- Value 2 -->
-                <div class="text-center p-6">
-                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-green-600" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                        </svg>
+                <!-- Название товара -->
+                <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-1">
+                    Угловой диван "Комфорт"
+                </h3>
+
+                <!-- Описание -->
+                <p class="text-gray-600 text-xs mb-3 line-clamp-2">
+                    Просторный угловой диван с ортопедическим матрасом
+                </p>
+
+                <!-- Цена -->
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-baseline space-x-1">
+                        <span class="text-xl font-bold text-gray-900">45 000 ₽</span>
+                        <span class="text-sm text-gray-500 line-through">56 000 ₽</span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4">Надежность</h3>
-                    <p class="text-gray-600">
-                        Соблюдаем сроки доставки и сборки. Профессиональные мастера
-                        с опытом работы от 5 лет.
-                    </p>
                 </div>
 
-                <!-- Value 3 -->
-                <div class="text-center p-6">
-                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-purple-600" stroke="currentColor" viewBox="0 0 24 24">
+                <!-- Кнопки действий -->
+                <div class="flex space-x-2">
+                    <button class="flex-1 bg-blue-600 text-white py-2 px-3 rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm flex items-center justify-center">
+                        <svg class="w-4 h-4 mr-1" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5.5M7 13l2.5 5.5m0 0L17 13m-7.5 5.5V21a1 1 0 001 1h4a1 1 0 001-1v-2.5"></path>
+                        </svg>
+                        В корзину
+                    </button>
+                    <button class="w-10 h-10 border border-gray-300 rounded-lg hover:border-gray-400 transition-colors flex items-center justify-center group/heart">
+                        <svg class="w-5 h-5 text-gray-400 group-hover/heart:text-red-500 transition-colors" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                         </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">Забота о клиентах</h3>
-                    <p class="text-gray-600">
-                        Персональный подход к каждому клиенту. Бесплатные консультации
-                        дизайнера и замеры.
-                    </p>
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Наша команда</h2>
+    </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Team Member 1 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden text-center">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-                         alt="Директор по производству"
-                         class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Алексей Петров</h3>
-                        <p class="text-gray-600 mb-4">Директор по производству</p>
-                        <p class="text-sm text-gray-500">
-                            Опыт работы в мебельной промышленности - 15 лет
-                        </p>
-                    </div>
-                </div>
 
-                <!-- Team Member 2 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden text-center">
-                    <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-                         alt="Главный дизайнер"
-                         class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Мария Сидорова</h3>
-                        <p class="text-gray-600 mb-4">Главный дизайнер</p>
-                        <p class="text-sm text-gray-500">
-                            Выпускница Британской высшей школы дизайна
-                        </p>
-                    </div>
-                </div>
+    <!-- Навигация -->
+    <nav aria-label="Page navigation example">
+        <div class="flex justify-center my-6">
+            <ul class="flex shadow-lg rounded-lg space-x-0">
+                <!-- Previous button -->
+                <li class="page-item disabled">
+                    <a class="flex items-center px-4 py-2 text-gray-500 bg-gray-800 border border-gray-700 rounded-l-lg cursor-not-allowed">
+                        Previous
+                    </a>
+                </li>
 
-                <!-- Team Member 3 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden text-center">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-                         alt="Менеджер по продажам"
-                         class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Дмитрий Козлов</h3>
-                        <p class="text-gray-600 mb-4">Менеджер по продажам</p>
-                        <p class="text-sm text-gray-500">
-                            Помог выбрать мебель более 1000 клиентам
-                        </p>
-                    </div>
-                </div>
+                <!-- Page numbers -->
+                <li class="page-item">
+                    <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 hover:bg-gray-700 transition-colors" href="#">
+                        1
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 hover:bg-gray-700 transition-colors" href="#">
+                        2
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 hover:bg-gray-700 transition-colors" href="#">
+                        3
+                    </a>
+                </li>
 
-                <!-- Team Member 4 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden text-center">
-                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
-                         alt="Специалист по клиентскому сервису"
-                         class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Елена Волкова</h3>
-                        <p class="text-gray-600 mb-4">Клиентский сервис</p>
-                        <p class="text-sm text-gray-500">
-                            Решает любые вопросы клиентов в течение 24 часов
-                        </p>
-                    </div>
-                </div>
-            </div>
+                <!-- Next button -->
+                <li class="page-item">
+                    <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 rounded-r-lg hover:bg-gray-700 transition-colors" href="#">
+                        Next
+                    </a>
+                </li>
+            </ul>
         </div>
-    </section>
+    </nav>
 {% endblock %}
+
 
 {% block footer %}
 	<div class="">
@@ -286,4 +240,3 @@
         </footer>
     </div>
 {% endblock %}
-
