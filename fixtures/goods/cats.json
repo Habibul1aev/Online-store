@@ -1,0 +1,72 @@
+[
+  {
+    "model": "goods.categories",
+    "pk": 1,
+    "fields": {
+      "created_at": "2025-11-26T18:10:32.604Z",
+      "updated_at": "2025-11-26T18:26:57.066Z",
+      "name": "Все товары",
+      "slug": "all"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 2,
+    "fields": {
+      "created_at": "2025-11-26T18:24:41.104Z",
+      "updated_at": "2025-11-26T18:24:41.104Z",
+      "name": "Кухня",
+      "slug": "kuhnya"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 3,
+    "fields": {
+      "created_at": "2025-11-26T18:25:03.098Z",
+      "updated_at": "2025-11-26T18:25:03.098Z",
+      "name": "Спальня",
+      "slug": "spalnya"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 4,
+    "fields": {
+      "created_at": "2025-11-26T18:25:42.567Z",
+      "updated_at": "2025-11-26T18:43:25.119Z",
+      "name": "Гостиная",
+      "slug": "gostinnaya"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 5,
+    "fields": {
+      "created_at": "2025-11-26T18:25:57.717Z",
+      "updated_at": "2025-11-26T18:25:57.717Z",
+      "name": "Офис",
+      "slug": "ofis"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 6,
+    "fields": {
+      "created_at": "2025-11-26T18:26:20.805Z",
+      "updated_at": "2025-11-26T18:26:20.805Z",
+      "name": "Фурнитура",
+      "slug": "furnitura"
+    }
+  },
+  {
+    "model": "goods.categories",
+    "pk": 7,
+    "fields": {
+      "created_at": "2025-11-26T18:26:46.482Z",
+      "updated_at": "2025-11-26T18:26:46.482Z",
+      "name": "Декор",
+      "slug": "dekor"
+    }
+  }
+]

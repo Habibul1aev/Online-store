@@ -1,10 +1,14 @@
 from django.shortcuts import render
 
-def main(request):
+from goods.models import Categories
 
+
+def main(request):
+    categories = Categories.objects.all()
 
     context = {
-        'title': "Главная"
+        'title': "Главная",
+        'categories': categories,
     }
     return render(request, 'main/body.html', context)
 

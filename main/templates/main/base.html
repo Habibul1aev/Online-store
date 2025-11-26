@@ -42,6 +42,7 @@
                                 <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                                     <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
                                     <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
+                                    <a href="{% url 'admin:index' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Admin</a>
                                     <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
                                 </div>
                             </div>
@@ -84,13 +85,9 @@
                 <!-- Dropdown menu -->
                 <div class="absolute left-0 mt-1 w-48 bg-gray-800 border border-gray-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                     <ul class="py-2">
-                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Все товары</a></li>
-                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Кухня</a></li>
-                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Спальня</a></li>
-                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Гостинная</a></li>
-                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Офис</a></li>
-                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Фурнитура</a></li>
-                      <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors">Декор</a></li>
+                        {% for category in categories %}
+                            <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors" href="{% url 'catalog:catalog' %}">{{ category.name }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
