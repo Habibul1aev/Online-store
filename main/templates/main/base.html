@@ -1,4 +1,5 @@
 {% load static %}
+{% load tag_goods %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -68,7 +69,7 @@
     </div>
     <div class="">
         <div class="relative">
-            <img class="w-max h-[1800px]" src="/static/deps/images/bg-image.jpg" alt="">
+            <img class="w-max h-[1800px]" src="{% static 'deps/images/goods/bg-image.jpg' %}" alt="">
         </div>
         <div class="container mx-auto px-4">
             <!-- Каталог -->
@@ -85,6 +86,7 @@
                 <!-- Dropdown menu -->
                 <div class="absolute left-0 mt-1 w-48 bg-gray-800 border border-gray-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                     <ul class="py-2">
+                        {% tag_category as categories %}
                         {% for category in categories %}
                             <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors" href="{% url 'catalog:catalog' %}">{{ category.name }}</a></li>
                         {% endfor %}
@@ -94,7 +96,7 @@
             <!-- Корзинка -->
             <div class="absolute inset-0 inset-x-[174px] inset-y-[170px]">
                 <button type="button" class="flex items-center bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors border border-gray-600">
-                    <img class="mx-1" src="/static/deps/icons/basket2-fill.svg" alt="Cart Icon" width="24" height="24">
+                    <img class="mx-1" src="{% static 'deps/icons/basket2-fill.svg' %}" alt="Cart Icon" width="24" height="24">
                     <span class="ml-2">0</span>
                 </button>
             </div>

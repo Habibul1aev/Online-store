@@ -1,1 +1,104 @@
-[]
+[
+  {
+    "model": "goods.products",
+    "pk": 1,
+    "fields": {
+      "created_at": "2025-11-30T06:45:11.545Z",
+      "updated_at": "2025-11-30T07:03:41.426Z",
+      "name": "Дерево декор",
+      "slug": "derevo-dekor",
+      "description": "Красивое дерево для декора комнаты подайдет для детской комнаты. Синии с подующими липистками",
+      "images": "goods_images/decor.jpg",
+      "price": "2000.00",
+      "discount": "5.00",
+      "quantity": 10,
+      "category": 7,
+      "is_publish": true
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 2,
+    "fields": {
+      "created_at": "2025-11-30T06:47:09.536Z",
+      "updated_at": "2025-11-30T06:47:09.536Z",
+      "name": "Колесики для дивана",
+      "slug": "kolesiki-dlya-divana",
+      "description": "Фурнитура для дивана. Удобная штука что бы передвигать в разные места без боли в спине",
+      "images": "goods_images/furnitura.jpg",
+      "price": "1000.00",
+      "discount": "0.00",
+      "quantity": 10,
+      "category": 6,
+      "is_publish": true
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 3,
+    "fields": {
+      "created_at": "2025-11-30T06:49:01.474Z",
+      "updated_at": "2025-11-30T06:49:01.474Z",
+      "name": "Стол для кухни",
+      "slug": "stol-dlya-kuhni",
+      "description": "Большой стол для кухни подойдет для удобной готовки с шкафчиками по бокам",
+      "images": "goods_images/kuhnya.jpg",
+      "price": "25000.00",
+      "discount": "15.00",
+      "quantity": 5,
+      "category": 2,
+      "is_publish": true
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 4,
+    "fields": {
+      "created_at": "2025-11-30T06:50:48.973Z",
+      "updated_at": "2025-11-30T06:50:48.973Z",
+      "name": "Угловой диван \"Комфорт\"",
+      "slug": "uglovoj-divan-komfort",
+      "description": "Просторный угловой диван с ортопедическим матрасом подойдет для гостивой комнаты",
+      "images": "goods_images/gostinay.jpg",
+      "price": "12000.00",
+      "discount": "10.00",
+      "quantity": 15,
+      "category": 4,
+      "is_publish": true
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 5,
+    "fields": {
+      "created_at": "2025-11-30T06:52:35.207Z",
+      "updated_at": "2025-11-30T06:52:35.207Z",
+      "name": "Диван для спальный",
+      "slug": "divan-dlya-spalnyj",
+      "description": "Двух местный диван размер стандартный с мотрасом",
+      "images": "goods_images/spalnay.jpg",
+      "price": "30000.00",
+      "discount": "15.00",
+      "quantity": 13,
+      "category": 3,
+      "is_publish": true
+    }
+  },
+  {
+    "model": "goods.products",
+    "pk": 6,
+    "fields": {
+      "created_at": "2025-11-30T06:54:12.517Z",
+      "updated_at": "2025-11-30T06:54:12.517Z",
+      "name": "Офисный стул",
+      "slug": "ofisnyj-stul",
+      "description": "Удобный кожанный офисный стул.",
+      "images": "goods_images/office.jpg",
+      "price": "5000.00",
+      "discount": "0.00",
+      "quantity": 50,
+      "category": 5,
+      "is_publish": true
+    }
+  }
+]
