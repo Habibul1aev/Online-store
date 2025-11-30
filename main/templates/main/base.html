@@ -88,7 +88,7 @@
                     <ul class="py-2">
                         {% tag_category as categories %}
                         {% for category in categories %}
-                            <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors" href="{% url 'catalog:catalog' %}">{{ category.name }}</a></li>
+                            <li><a class="block px-4 py-2 text-white hover:bg-gray-700 transition-colors" href="{% url 'catalog:catalog' category.slug %}">{{ category.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
