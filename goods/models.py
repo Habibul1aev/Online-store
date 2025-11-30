@@ -29,6 +29,7 @@ class Products(TimeStampAbstractModel):
         db_table = 'product'
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
+        ordering = ('id', )
 
     name = models.CharField('Название', max_length=150, unique=True)
     slug = models.SlugField('URL', max_length=200, unique=True, blank=True, null=True)
