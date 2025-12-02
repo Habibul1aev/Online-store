@@ -1,8 +1,154 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% load tag_goods %}
 
 
 {% block content %}
+    <!-- Фильтры для каталога -->
+    <form action="" method="get">
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-800">Фильтры</h2>
+                <a href="?{% if category_slug %}category={{ category_slug }}{% endif %}" class="text-blue-600 hover:text-blue-800 text-sm font-medium" onclick="?''">
+                    Сбросить все
+                </a>
+            </div>
+
+            <div class="flex flex-wrap justify-between gap-6">
+                <!-- Фильтр по цене -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-gray-700">Цена, ₽</h3>
+                    <div class="flex items-center space-x-4">
+                        <label>
+                            <input type="number"
+                                   placeholder="От"
+                                   name="from_price"
+                                   value="{{ request.GET.from_price|default:'' }}"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   min="0">
+                        </label>
+                        <span class="text-gray-400">—</span>
+                        <label>
+                            <input type="number"
+                                   placeholder="До"
+                                   name="to_price"
+                                   value="{{ request.GET.to_price|default:'' }}"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   min="0">
+                        </label>
+                    </div>
+                    <div class="relative pt-1">
+                        <label>
+                            <input type="range" min="0" max="100000" value="50000"
+                                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        </label>
+                        <div class="flex justify-between text-xs text-gray-500 mt-2">
+                            <span>0 ₽</span>
+                            <span>100 000 ₽</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="space-y-2 max-h-48 overflow-y-auto pr-2">
+                        <label class="flex items-center gap-[80px]">
+                            <div class="font-semibold text-gray-700">Товары по акции</div>
+                            <input type="checkbox" class="rounded text-blue-600 focus:ring-blue-500" name="on_sale" value="on"
+                            {% if request.GET.on_sale == 'on' %} checked {% endif %}>
+                        </label>
+                        <label class="flex items-center gap-[106px]">
+                            <div class="font-semibold text-gray-700">По умолчании</div>
+                            <input type="radio" class="rounded text-blue-600 focus:ring-blue-500" name="order_by" value=""
+                            {% if not request.GET.order_by %} checked {% endif %}>
+                        </label>
+                        <label class="flex items-center gap-[20px]">
+                            <div class="font-semibold text-gray-700">От дешевых к дорогим</div>
+                            <input type="radio" class="rounded text-blue-600 focus:ring-blue-500" name="order_by" value="price"
+                            {% if request.GET.on_sale == 'price' %} checked {% endif %}>
+                        </label>
+                        <label class="flex items-center gap-[20px]">
+                            <div class="font-semibold text-gray-700">От дорогих к дешевым</div>
+                            <input type="radio" class="rounded text-blue-600 focus:ring-blue-500" name="order_by" value="-price"
+                            {% if request.GET.on_sale == '-price' %} checked {% endif %}>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="hidden">
+                    <!-- Фильтр по категориям -->
+    {#                <div class="space-y-3">#}
+    {#                    <h3 class="font-semibold text-gray-700">Категории</h3>#}
+    {#                    <div class="space-y-2 max-h-48 overflow-y-auto pr-2">#}
+    {#                        {% for category in category %}#}
+    {#                        	<label class="flex items-center">#}
+    {#                                <input type="checkbox" class="rounded text-blue-600 focus:ring-blue-500">#}
+    {#                                <span class="ml-2 text-gray-600">{{ category.name }}</span>#}
+    {#                                <span class="ml-auto text-gray-400 text-sm">(24)</span>#}
+    {#                            </label>#}
+    {#                        {% endfor %}#}
+    {#                    </div>#}
+    {#                </div>#}
+                </div>
+
+                <!-- Фильтр по рейтингу -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-gray-700">Рейтинг</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded text-blue-600 focus:ring-blue-500">
+                            <div class="flex ml-2">
+                                {% for i in "12345" %}
+                                    <svg class="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                {% endfor %}
+                                <span class="ml-2 text-gray-600">5 звезд</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded text-blue-600 focus:ring-blue-500">
+                            <div class="flex ml-2">
+                                {% for i in "1234" %}
+                                    <svg class="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                {% endfor %}
+                                <svg class="w-4 h-4 text-gray-300 fill-current" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                <span class="ml-2 text-gray-600">4+ звезды</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded text-blue-600 focus:ring-blue-500">
+                            <div class="flex ml-2">
+                                {% for i in "123" %}
+                                    <svg class="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                {% endfor %}
+                                {% for i in "12" %}
+                                    <svg class="w-4 h-4 text-gray-300 fill-current" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                {% endfor %}
+                                <span class="ml-2 text-gray-600">3+ звезды</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопки действий -->
+            <div class="flex justify-end space-x-4 mt-6 pt-6 border-t border-gray-200">
+                <button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    Применить фильтры
+                </button>
+            </div>
+        </div>
+    </form>
+
+
     <div class="grid grid-cols-3 gap-[40px] ">
         <!-- Компактная карточка товара -->
         {% for product in goods %}
@@ -156,38 +302,40 @@
     </div>
 
     <!-- Навигация -->
-    <nav aria-label="Page navigation">
-        <div class="flex justify-center my-6">
-            <div class="flex shadow-lg rounded-lg">
-                <!-- Кнопка "Назад" -->
-                <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 rounded-l-lg {% if not goods.has_previous %}cursor-not-allowed opacity-50{% else %}hover:bg-gray-700{% endif %}" href="{% if goods.has_previous %}?page={{ goods.previous_page_number }}{% endif %}">
-                    Назад
-                </a>
+    {% if goods.has_other_pages %}
+    	<nav aria-label="Page navigation">
+            <div class="flex justify-center my-6">
+                <div class="flex shadow-lg rounded-lg">
+                    <!-- Кнопка "Назад" -->
+                    <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 rounded-l-lg {% if not goods.has_previous %}cursor-not-allowed opacity-50{% else %}hover:bg-gray-700{% endif %}" href="{% if goods.has_previous %}?{% change_params page=goods.previous_page_number %}{% endif %}">
+                        Назад
+                    </a>
 
-                <!-- Номера страниц -->
-                {% for page in goods.paginator.page_range %}
-                    {% if page >= goods.number|add:-2 and page <= goods.number|add:2 %}
-                        {% if goods.number == page %}
-                            <!-- Активная страница -->
-                            <span class="flex items-center px-4 py-2 bg-gray-600 text-white border border-gray-700">
-                                {{ page }}
-                            </span>
-                        {% else %}
-                            <!-- Неактивная страница -->
-                            <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 hover:bg-gray-700 transition-colors" href="?page={{ page }}">
-                                {{ page }}
-                            </a>
+                    <!-- Номера страниц -->
+                    {% for page in goods.paginator.page_range %}
+                        {% if page >= goods.number|add:-2 and page <= goods.number|add:2 %}
+                            {% if goods.number == page %}
+                                <!-- Активная страница -->
+                                <span class="flex items-center px-4 py-2 bg-gray-600 text-white border border-gray-700">
+                                    {{ page }}
+                                </span>
+                            {% else %}
+                                <!-- Неактивная страница -->
+                                <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 hover:bg-gray-700 transition-colors" href="?{% change_params page=page %}">
+                                    {{ page }}
+                                </a>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                {% endfor %}
+                    {% endfor %}
 
-                <!-- Кнопка "Следующая" -->
-                <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 rounded-r-lg {% if not goods.has_next %}cursor-not-allowed opacity-50{% else %}hover:bg-gray-700{% endif %}" href="{% if goods.has_next %}?page={{ goods.next_page_number }}{% endif %}">
-                    Следующая
-                </a>
+                    <!-- Кнопка "Следующая" -->
+                    <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 rounded-r-lg {% if not goods.has_next %}cursor-not-allowed opacity-50{% else %}hover:bg-gray-700{% endif %}" href="{% if goods.has_next %}?{% change_params page=goods.next_page_number %}{% endif %}">
+                        Следующая
+                    </a>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    {% endif %} 
 {% endblock %}
 
 
@@ -304,8 +452,10 @@
                         <div class="mt-6">
                             <h4 class="text-sm font-semibold mb-3">РАССЫЛКА</h4>
                             <div class="flex">
-                                <input type="email" placeholder="Ваш email"
-                                       class="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"/>
+                                <label>
+                                    <input type="email" placeholder="Ваш email"
+                                           class="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"/>
+                                </label>
                                 <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-r-lg transition-colors duration-300">
                                     <svg class="w-5 h-5" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
