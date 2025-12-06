@@ -3,20 +3,25 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 
 from goods.models import Products, Categories
+from goods.utils import q_search
 
 
 def catalog(request, category_slug = None):
-    category = get_object_or_404(Categories, slug = category_slug)
+    query = request.GET.get('q')
 
     if category_slug == 'all':
         goods = Products.objects.all()
+    elif query:
+        goods = q_search(query)
     else:
+        category = get_object_or_404(Categories, slug=category_slug)
         goods = Products.objects.filter(category=category, is_publish=True)
 
     min_price = request.GET.get('from_price', None)
     max_price = request.GET.get('to_price', None)
     order_by = request.GET.get('order_by', None)
     on_sale = request.GET.get('on_sale', None)
+
 
     if min_price and max_price:
         if min_price <= max_price:

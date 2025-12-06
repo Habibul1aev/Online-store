@@ -5,11 +5,11 @@
 
 {% block content %}
     <!-- Фильтры для каталога -->
-    <form action="" method="get">
+    <form method="get">
         <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-xl font-bold text-gray-800">Фильтры</h2>
-                <a href="?{% if category_slug %}category={{ category_slug }}{% endif %}" class="text-blue-600 hover:text-blue-800 text-sm font-medium" onclick="?''">
+                <a href="?{% if category_slug %}category={{ category_slug }}{% endif %}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
                     Сбросить все
                 </a>
             </div>
@@ -51,6 +51,9 @@
 
                 <div class="space-y-3">
                     <div class="space-y-2 max-h-48 overflow-y-auto pr-2">
+                        {% if request.GET.q %}
+                            <input type="hidden" name="q" value="{{ request.GET.q }}">
+                        {% endif %}
                         <label class="flex items-center gap-[80px]">
                             <div class="font-semibold text-gray-700">Товары по акции</div>
                             <input type="checkbox" class="rounded text-blue-600 focus:ring-blue-500" name="on_sale" value="on"
@@ -64,30 +67,14 @@
                         <label class="flex items-center gap-[20px]">
                             <div class="font-semibold text-gray-700">От дешевых к дорогим</div>
                             <input type="radio" class="rounded text-blue-600 focus:ring-blue-500" name="order_by" value="price"
-                            {% if request.GET.on_sale == 'price' %} checked {% endif %}>
+                            {% if request.GET.order_by == 'price' %} checked {% endif %}>
                         </label>
                         <label class="flex items-center gap-[20px]">
                             <div class="font-semibold text-gray-700">От дорогих к дешевым</div>
                             <input type="radio" class="rounded text-blue-600 focus:ring-blue-500" name="order_by" value="-price"
-                            {% if request.GET.on_sale == '-price' %} checked {% endif %}>
+                            {% if request.GET.order_by == '-price' %} checked {% endif %}>
                         </label>
                     </div>
-                </div>
-
-                <div class="hidden">
-                    <!-- Фильтр по категориям -->
-    {#                <div class="space-y-3">#}
-    {#                    <h3 class="font-semibold text-gray-700">Категории</h3>#}
-    {#                    <div class="space-y-2 max-h-48 overflow-y-auto pr-2">#}
-    {#                        {% for category in category %}#}
-    {#                        	<label class="flex items-center">#}
-    {#                                <input type="checkbox" class="rounded text-blue-600 focus:ring-blue-500">#}
-    {#                                <span class="ml-2 text-gray-600">{{ category.name }}</span>#}
-    {#                                <span class="ml-auto text-gray-400 text-sm">(24)</span>#}
-    {#                            </label>#}
-    {#                        {% endfor %}#}
-    {#                    </div>#}
-    {#                </div>#}
                 </div>
 
                 <!-- Фильтр по рейтингу -->
@@ -302,40 +289,42 @@
     </div>
 
     <!-- Навигация -->
-    {% if goods.has_other_pages %}
-    	<nav aria-label="Page navigation">
-            <div class="flex justify-center my-6">
-                <div class="flex shadow-lg rounded-lg">
-                    <!-- Кнопка "Назад" -->
-                    <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 rounded-l-lg {% if not goods.has_previous %}cursor-not-allowed opacity-50{% else %}hover:bg-gray-700{% endif %}" href="{% if goods.has_previous %}?{% change_params page=goods.previous_page_number %}{% endif %}">
-                        Назад
-                    </a>
+    <div class="absolute flex">
+        {% if goods.has_other_pages %}
+            <nav aria-label="Page navigation">
+                <div class="flex justify-center my-6">
+                    <div class="flex shadow-lg rounded-lg">
+                        <!-- Кнопка "Назад" -->
+                        <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 rounded-l-lg {% if not goods.has_previous %}cursor-not-allowed opacity-50{% else %}hover:bg-gray-700{% endif %}" href="{% if goods.has_previous %}?{% change_params page=goods.previous_page_number %}{% endif %}">
+                            Назад
+                        </a>
 
-                    <!-- Номера страниц -->
-                    {% for page in goods.paginator.page_range %}
-                        {% if page >= goods.number|add:-2 and page <= goods.number|add:2 %}
-                            {% if goods.number == page %}
-                                <!-- Активная страница -->
-                                <span class="flex items-center px-4 py-2 bg-gray-600 text-white border border-gray-700">
-                                    {{ page }}
-                                </span>
-                            {% else %}
-                                <!-- Неактивная страница -->
-                                <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 hover:bg-gray-700 transition-colors" href="?{% change_params page=page %}">
-                                    {{ page }}
-                                </a>
+                        <!-- Номера страниц -->
+                        {% for page in goods.paginator.page_range %}
+                            {% if page >= goods.number|add:-2 and page <= goods.number|add:2 %}
+                                {% if goods.number == page %}
+                                    <!-- Активная страница -->
+                                    <span class="flex items-center px-4 py-2 bg-gray-600 text-white border border-gray-700">
+                                        {{ page }}
+                                    </span>
+                                {% else %}
+                                    <!-- Неактивная страница -->
+                                    <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 hover:bg-gray-700 transition-colors" href="?{% change_params page=page %}">
+                                        {{ page }}
+                                    </a>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                    {% endfor %}
+                        {% endfor %}
 
-                    <!-- Кнопка "Следующая" -->
-                    <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 rounded-r-lg {% if not goods.has_next %}cursor-not-allowed opacity-50{% else %}hover:bg-gray-700{% endif %}" href="{% if goods.has_next %}?{% change_params page=goods.next_page_number %}{% endif %}">
-                        Следующая
-                    </a>
+                        <!-- Кнопка "Следующая" -->
+                        <a class="flex items-center px-4 py-2 text-white bg-gray-800 border border-gray-700 rounded-r-lg {% if not goods.has_next %}cursor-not-allowed opacity-50{% else %}hover:bg-gray-700{% endif %}" href="{% if goods.has_next %}?{% change_params page=goods.next_page_number %}{% endif %}">
+                            Следующая
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    {% endif %} 
+            </nav>
+        {% endif %}
+    </div>
 {% endblock %}
 
 
