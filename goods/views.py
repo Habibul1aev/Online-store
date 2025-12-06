@@ -38,7 +38,7 @@ def catalog(request, category_slug = None):
         goods = goods.order_by(order_by)
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(goods, 3)
+    paginator = Paginator(goods, 6)
     current_page = paginator.page(int(page))
 
     context = {
