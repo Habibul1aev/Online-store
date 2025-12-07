@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="bg-gray-50">
+        <div class="min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Боковое меню -->
+                    <aside class="lg:w-1/4">
+                        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+                            <!-- Аватар и информация -->
+                            <div class="flex flex-col items-center mb-6">
+                                <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                                    <span class="text-3xl font-bold text-blue-600"><img
+                                            src="{% static 'deps/images/users/baseavatar.jpg' %}" alt=""></span>
+                                </div>
+                                <h2 class="text-xl font-bold text-gray-800">Иван Иванов</h2>
+                                <p class="text-gray-600">ivan@example.com</p>
+                                <p class="text-gray-500 text-sm mt-1">Участник с января 2024</p>
+                            </div>
+
+                            <!-- Меню профиля -->
+                            <h2 class="text-[20px] font-bold text-gray-800">
+                                Настройки профиля
+                            </h2>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mt-[10px]"> Имя </label>
+                                <label>
+                                    <input
+                                            type="text"
+                                            name="first_name"
+                                            required
+                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                            placeholder="Иван">
+                                </label>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mt-[10px]">Фамилия</label>
+                                <label>
+                                    <input
+                                            type="text"
+                                            name="last_name"
+                                            required
+                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                            placeholder="Иванов">
+                                </label>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mt-[10px]">Email</label>
+                                <label>
+                                    <input
+                                            type="text"
+                                            name="email"
+                                            required
+                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                            placeholder="example@mail.com">
+                                </label>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mt-[10px]">Имя пользователя</label>
+                                <label>
+                                    <input
+                                            type="text"
+                                            name="name_user"
+                                            required
+                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                            placeholder="Ivan1234"
+                                    >
+                                </label>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mt-[10px]">Адрес</label>
+                                <label>
+                                    <input
+                                            type="text"
+                                            name="address"
+                                            required
+                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                            placeholder="Введите свой адрес"
+                                    >
+                                </label>
+                            </div>
+                            <button
+                                type="submit"
+                                class="mt-[20px] w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
+                                Сохранить
+                            </button>
+                        </div>
+                    </aside>
+
+                    <!-- Основной контент -->
+                    <main class="lg:w-3/4">
+                        <!-- Корзина -->
+                        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                            <div class="flex justify-between items-center mb-6">
+                                <h2 class="text-2xl font-bold text-gray-800">
+                                    <i class="fas fa-shopping-cart mr-3 text-blue-600"></i>
+                                    Корзина
+                                </h2>
+                                <span class="text-gray-600">3 товара</span>
+                            </div>
+
+                            <div class="space-y-4">
+                                <!-- Товар 1 -->
+                                <div class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition">
+                                    <div class="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="fas fa-box text-gray-400 text-2xl"></i>
+                                    </div>
+                                    <div class="flex-grow">
+                                        <h3 class="font-medium text-gray-800">Смартфон XYZ Pro</h3>
+                                        <p class="text-gray-600 text-sm">Черный, 256 ГБ</p>
+                                        <div class="flex items-center mt-2">
+                                            <button class="text-gray-500 hover:text-gray-700">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <span class="mx-3 font-medium">1</span>
+                                            <button class="text-gray-500 hover:text-gray-700">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-bold text-gray-800">34 999 ₽</div>
+                                        <button class="text-red-500 hover:text-red-700 text-sm mt-2">
+                                            <i class="fas fa-trash mr-1"></i> Удалить
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Итого -->
+                                <div class="bg-gray-50 p-4 rounded-lg mt-6">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-600">Товары (3)</span>
+                                        <span class="font-medium">51 997 ₽</span>
+                                    </div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-600">Доставка</span>
+                                        <span class="font-medium">Бесплатно</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-lg font-bold pt-3 border-t border-gray-300">
+                                        <span>Итого</span>
+                                        <span class="text-blue-600">51 997 ₽</span>
+                                    </div>
+                                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg mt-6 transition">
+                                        <i class="fas fa-credit-card mr-2"></i>Перейти к оформлению
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Мои заказы -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex justify-between items-center mb-6">
+                                <h2 class="text-2xl font-bold text-gray-800">
+                                    <i class="fas fa-shopping-bag mr-3 text-blue-600"></i>
+                                    Мои заказы
+                                </h2>
+                                <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">
+                                    Все заказы <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+
+                            <div class="space-y-4">
+                                <!-- Заказ 1 -->
+                                <div class="border border-gray-200 rounded-lg hover:shadow-md transition">
+                                    <div class="p-4 bg-gray-50 border-b border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <div>
+                                                <span class="font-medium">Заказ №24578</span>
+                                                <span class="text-gray-600 text-sm ml-3">от 15.03.2024</span>
+                                            </div>
+                                            <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">
+                                                Доставлен
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                            <div>
+                                                <h3 class="font-medium text-gray-800">2 товара</h3>
+                                                <p class="text-gray-600 text-sm">Сумма: 25 499 ₽</p>
+                                            </div>
+                                            <div class="mt-2 md:mt-0">
+                                                <button class="text-blue-600 hover:text-blue-800 font-medium mr-4">
+                                                    <i class="fas fa-eye mr-1"></i> Подробнее
+                                                </button>
+                                                <button class="text-green-600 hover:text-green-800 font-medium">
+                                                    <i class="fas fa-redo mr-1"></i> Повторить заказ
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Заказ 2 -->
+                                <div class="border border-gray-200 rounded-lg hover:shadow-md transition">
+                                    <div class="p-4 bg-gray-50 border-b border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <div>
+                                                <span class="font-medium">Заказ №24576</span>
+                                                <span class="text-gray-600 text-sm ml-3">от 10.03.2024</span>
+                                            </div>
+                                            <span class="bg-yellow-100 text-yellow-800 text-sm px-3 py-1 rounded-full">
+                                                В пути
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                            <div>
+                                                <h3 class="font-medium text-gray-800">1 товар</h3>
+                                                <p class="text-gray-600 text-sm">Сумма: 12 999 ₽</p>
+                                            </div>
+                                            <div class="mt-2 md:mt-0">
+                                                <button class="text-blue-600 hover:text-blue-800 font-medium mr-4">
+                                                    <i class="fas fa-eye mr-1"></i> Подробнее
+                                                </button>
+                                                <button class="text-gray-600 hover:text-gray-800 font-medium">
+                                                    <i class="fas fa-truck mr-1"></i> Отследить
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Заказ 3 -->
+                                <div class="border border-gray-200 rounded-lg hover:shadow-md transition">
+                                    <div class="p-4 bg-gray-50 border-b border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <div>
+                                                <span class="font-medium">Заказ №24570</span>
+                                                <span class="text-gray-600 text-sm ml-3">от 05.03.2024</span>
+                                            </div>
+                                            <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
+                                                Обрабатывается
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                            <div>
+                                                <h3 class="font-medium text-gray-800">3 товара</h3>
+                                                <p class="text-gray-600 text-sm">Сумма: 18 750 ₽</p>
+                                            </div>
+                                            <div class="mt-2 md:mt-0">
+                                                <button class="text-blue-600 hover:text-blue-800 font-medium mr-4">
+                                                    <i class="fas fa-eye mr-1"></i> Подробнее
+                                                </button>
+                                                <button class="text-red-600 hover:text-red-800 font-medium">
+                                                    <i class="fas fa-times mr-1"></i> Отменить
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
