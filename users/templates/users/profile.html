@@ -13,10 +13,15 @@
                             <!-- Аватар и информация -->
                             <div class="flex flex-col items-center mb-6">
                                 <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                                    <span class="text-3xl font-bold text-blue-600"><img
-                                            src="{% static 'deps/images/users/baseavatar.jpg' %}" alt=""></span>
+                                    {% if user.image %}
+                                        <span class="text-3xl font-bold text-blue-600"><img
+                                                src="{{ user.image.url }}" alt=""></span>
+                                    {% else %}
+                                        <span class="text-3xl font-bold text-blue-600"><img
+                                                src="{% static 'deps/images/users/baseavatar.jpg' %}" alt=""></span>
+                                    {% endif %}
                                 </div>
-                                <h2 class="text-xl font-bold text-gray-800">Иван Иванов</h2>
+                                <h2 class="text-xl font-bold text-gray-800">{{ user.first_name }} {{ user.last_name }}</h2>
                                 <p class="text-gray-600">ivan@example.com</p>
                                 <p class="text-gray-500 text-sm mt-1">Участник с января 2024</p>
                             </div>
@@ -25,68 +30,89 @@
                             <h2 class="text-[20px] font-bold text-gray-800">
                                 Настройки профиля
                             </h2>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mt-[10px]"> Имя </label>
-                                <label>
-                                    <input
-                                            type="text"
-                                            name="first_name"
-                                            required
-                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                                            placeholder="Иван">
-                                </label>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mt-[10px]">Фамилия</label>
-                                <label>
-                                    <input
-                                            type="text"
-                                            name="last_name"
-                                            required
-                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                                            placeholder="Иванов">
-                                </label>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mt-[10px]">Email</label>
-                                <label>
-                                    <input
-                                            type="text"
-                                            name="email"
-                                            required
-                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                                            placeholder="example@mail.com">
-                                </label>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mt-[10px]">Имя пользователя</label>
-                                <label>
-                                    <input
-                                            type="text"
-                                            name="name_user"
-                                            required
-                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                                            placeholder="Ivan1234"
-                                    >
-                                </label>
-                            </div>
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-gray-700 mt-[10px]">Адрес</label>
-                                <label>
-                                    <input
-                                            type="text"
-                                            name="address"
-                                            required
-                                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                                            placeholder="Введите свой адрес"
-                                    >
-                                </label>
-                            </div>
-                            <button
-                                type="submit"
-                                class="mt-[20px] w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
-                                Сохранить
-                            </button>
+                            <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mt-[10px]"> Аватарка </label>
+                                    <label>
+                                        <input
+                                                type="file"
+                                                name="image"
+                                                id="id_image"
+                                                accept="image/*">
+                                        {% if form.image.errors %}
+                                            <div class="mt-1 text-sm text-red-600">{{ form.image.errors }}</div>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mt-[10px]"> Имя </label>
+                                    <label>
+                                        <input
+                                                type="text"
+                                                name="first_name"
+                                                value="{{ form.first_name.value }}"
+                                                required
+                                                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                                placeholder="Иван">
+                                        {% if form.first_name.errors %}
+                                            <div class="mt-1 text-sm text-red-600">{{ form.first_name.errors }}</div>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mt-[10px]">Фамилия</label>
+                                    <label>
+                                        <input
+                                                type="text"
+                                                name="last_name"
+                                                value="{{ form.last_name.value }}"
+                                                required
+                                                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                                placeholder="Иванов">
+                                        {% if form.last_name.errors %}
+                                            <div class="mt-1 text-sm text-red-600">{{ form.last_name.errors }}</div>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mt-[10px]">Email</label>
+                                    <label>
+                                        <input
+                                                type="text"
+                                                name="email"
+                                                value="{{ form.email.value }}"
+                                                required
+                                                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                                placeholder="example@mail.com">
+                                        {% if form.email.errors %}
+                                            <div class="mt-1 text-sm text-red-600">{{ form.email.errors }}</div>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mt-[10px]">Имя
+                                        пользователя</label>
+                                    <label>
+                                        <input
+                                                type="text"
+                                                name="username"
+                                                value="{{ form.username.value }}"
+                                                required
+                                                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                                placeholder="Ivan1234">
+                                        {% if form.username.errors %}
+                                            <div class="mt-1 text-sm text-red-600">{{ form.username.errors }}</div>
+                                        {% endif %}
+                                    </label>
+                                </div>
+
+                                <button
+                                        type="submit"
+                                        class="mt-[20px] w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
+                                    Сохранить
+                                </button>
+                            </form>
                         </div>
                     </aside>
 

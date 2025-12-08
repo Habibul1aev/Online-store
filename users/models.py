@@ -7,7 +7,7 @@ class User(AbstractUser):
         verbose_name = 'Пользователя'
         verbose_name_plural = 'Пользователя'
 
-    image =  models.ImageField(upload_to='users_images', verbose_name='Аватар', blank=True, null=True)
+    image = models.ImageField(upload_to='users_images', verbose_name='Аватар', blank=True, null=True)
 
     def __str__(self):
         return self.username
